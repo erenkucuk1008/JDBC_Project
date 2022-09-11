@@ -43,6 +43,10 @@ public class JDBC_FirstStep {
 
             System.out.println("Connection was successfull");
 
+            rs.close();
+            sttmnt.close();
+            rs.close();
+
 
         }catch (SQLException e){
             System.out.println("Connection has failed "+ e.getMessage());

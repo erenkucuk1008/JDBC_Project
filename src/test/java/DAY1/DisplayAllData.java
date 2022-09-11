@@ -46,5 +46,10 @@ public class DisplayAllData {
             }
             System.out.println();
         }
+
+        //sirasiyla kapatmamiz gerek
+        rs.close();
+        stm.close();
+        con.close();
     }
 }
