@@ -146,8 +146,9 @@ public class DB_Utility {
     public static List<String> getAllColumnNamesAsList(){
 
         List<String> columnNameList = new ArrayList<>();
+        int colCount = getColumnCount();
         try {
-            for (int col = 1; col <= getColumnCount(); col++) {
+            for (int col = 1; col <= colCount; col++) {
                 columnNameList.add(rsmd.getColumnName(col));
             }
         }catch (SQLException e){
@@ -155,6 +156,22 @@ public class DB_Utility {
         }
 
         return columnNameList;
+    }
+
+    public static List<String> getRowDataAsList(int rowNum){
+
+        List<String> rowDataAsList = new ArrayList<>();
+        int colCount = getColumnCount();
+        try {
+            rs.absolute(rowNum);
+            for (int col = 0; col <= colCount; col++) {
+                rowDataAsList.add(rs.getString(col));
+            }
+        }catch (SQLException e){
+            System.out.println("Error occurred while getRowDataAsList "+e.getMessage());
+        }
+
+        return rowDataAsList;
     }
 
 }
