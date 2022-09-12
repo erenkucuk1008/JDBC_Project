@@ -20,7 +20,7 @@ public class DB_Utility {
 
         try {
             con = DriverManager.getConnection(url, username, password);
-            System.out.println("Connection was successfull");
+            System.out.println("Connection was successful");
         } catch (SQLException e) {
             System.out.println("Connection has failed " + e.getMessage());
         }
@@ -35,7 +35,7 @@ public class DB_Utility {
 
         try {
             con = DriverManager.getConnection(url, username, password);
-            System.out.println("Connection was successfull");
+            System.out.println("Connection was successful");
         } catch (SQLException e) {
             System.out.println("Connection has failed " + e.getMessage());
         }
@@ -53,7 +53,7 @@ public class DB_Utility {
             stm = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs = stm.executeQuery(sql);
         } catch (SQLException e) {
-            System.out.println("Error Occured While Running Query " + e.getMessage());
+            System.out.println("Error Occurred While Running Query " + e.getMessage());
         }
 
         return rs;
@@ -69,7 +69,7 @@ public class DB_Utility {
             }
             System.out.println();
         } catch (SQLException e) {
-            System.out.println("Error occured while getting column names " + e.getMessage());
+            System.out.println("Error occurred while getting column names " + e.getMessage());
         }
         return rs;
     }
@@ -87,7 +87,7 @@ public class DB_Utility {
                 System.out.println();
             }
         } catch (SQLException e) {
-            System.out.println("Error occured while getting all rows " + e.getMessage());
+            System.out.println("Error occurred while getting all rows " + e.getMessage());
         }
 
         return rs;
@@ -103,8 +103,25 @@ public class DB_Utility {
             if (stm != null) stm.close();
             if (con != null) con.close();
         } catch (SQLException e) {
-            System.out.println("Error occured while closing resources " + e.getMessage());
+            System.out.println("Error occurred while closing resources " + e.getMessage());
         }
+    }
+
+    /**
+     * find out the row count
+     * @return row count of this ResultSet
+     */
+    public static int getRowCount(){
+
+        int rowCount = 0;
+        try {
+            rs.last();
+            rowCount = rs.getRow();
+        }catch(SQLException e){
+            System.out.println("Error occurred while getting row count "+e.getMessage());
+        }
+
+        return getRowCount();
     }
 
 }
