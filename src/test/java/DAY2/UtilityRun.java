@@ -11,9 +11,18 @@ public class UtilityRun {
     public static void main(String[] args) throws SQLException {
 
         DB_Utility.createConnection();
-        ResultSet result = DB_Utility.runQuery("SELECT * FROM EMPLOYEES");
-        DB_Utility.getAllColumnNames();
-        DB_Utility.getAllRows();
+        ResultSet result = DB_Utility.runQuery("SELECT * FROM REGIONS");
+        result.next();
+        System.out.println("Region Name: "+ result.getString("REGION_NAME"));
+
+        int totalRow = DB_Utility.getRowCount();
+        System.out.println("Total row : "+totalRow);
+
+        int totalColumn = DB_Utility.getColumnCount();
+        System.out.println("totalColumn = " + totalColumn);
+
+        System.out.println("getAllColumnNamesAsList = " + DB_Utility.getAllColumnNamesAsList());
+
         DB_Utility.destroy();
 
     }

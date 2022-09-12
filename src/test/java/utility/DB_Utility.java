@@ -121,7 +121,40 @@ public class DB_Utility {
             System.out.println("Error occurred while getting row count "+e.getMessage());
         }
 
-        return getRowCount();
+        return rowCount;
+    }
+
+    /**
+     * find out the column count
+     * @return column count of this ResultSet
+     */
+    public static int getColumnCount(){
+
+        int columnCount = 0;
+        try {
+            rsmd = rs.getMetaData();
+            columnCount = rsmd.getColumnCount();
+        }catch(SQLException e){
+            System.out.println("Error occurred while getting column count "+ e.getMessage());
+        }
+        //return columnCount yazabilmek icin int columnCount=0 yaziyoyoruz
+        //yoksa try in icinde kalacagi icin return de kullanamiyoruz..
+        return columnCount;
+    }
+
+    //Get all the column names into a list object
+    public static List<String> getAllColumnNamesAsList(){
+
+        List<String> columnNameList = new ArrayList<>();
+        try {
+            for (int col = 1; col <= getColumnCount(); col++) {
+                columnNameList.add(rsmd.getColumnName(col));
+            }
+        }catch (SQLException e){
+            System.out.println("Error occurred while getting all Column names "+e.getMessage());
+        }
+
+        return columnNameList;
     }
 
 }
