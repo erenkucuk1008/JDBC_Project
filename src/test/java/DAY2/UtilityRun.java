@@ -21,7 +21,17 @@ public class UtilityRun {
         int totalColumn = DB_Utility.getColumnCount();
         System.out.println("totalColumn = " + totalColumn);
 
-        System.out.println("getAllColumnNamesAsList = " + DB_Utility.getAllColumnNamesAsList());
+        System.out.println("getAllColumnNamesAsList = "
+                + DB_Utility.getAllColumnNamesAsList());
+
+        System.out.println("DB_Utility.getRowDataAsList(3) = "
+                + DB_Utility.getRowDataAsList(3));
+
+        System.out.println("DB_Utility.getCellValue(3,2) = "
+                + DB_Utility.getCellValue(3, 2));
+
+        System.out.println("DB_Utility.getCellValue(3, \"REGION_NAME\") = "
+                + DB_Utility.getCellValue(3, "REGION_NAME"));
 
         DB_Utility.destroy();
 

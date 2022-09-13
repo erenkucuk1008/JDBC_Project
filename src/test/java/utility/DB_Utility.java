@@ -164,7 +164,7 @@ public class DB_Utility {
         int colCount = getColumnCount();
         try {
             rs.absolute(rowNum);
-            for (int col = 0; col <= colCount; col++) {
+            for (int col = 1; col <= colCount; col++) {
                 rowDataAsList.add(rs.getString(col));
             }
         }catch (SQLException e){
@@ -172,6 +172,68 @@ public class DB_Utility {
         }
 
         return rowDataAsList;
+    }
+
+    /**
+     * getting the cell value according to rowNum and columnIndex
+     * @param rowNum
+     * @param columnIndex
+     * @return the value in String at that location
+     */
+    public static String getCellValue(int rowNum, int columnIndex){
+
+        String cellValue = "";
+        try{
+            rs.absolute(rowNum);
+            cellValue = rs.getString(columnIndex);
+        }catch (SQLException e){
+            System.out.println("Error occurred while getCellValue "+e.getMessage());
+        }
+
+        return cellValue;
+    }
+
+    /**
+     * getting the cell value according to rowNum and columnIndex
+     * @param rowNum
+     * @param columnName
+     * @return the value in String at that location
+     */
+    public static String getCellValue(int rowNum, String columnName){
+
+        String cellValue = "";
+        try{
+            rs.absolute(rowNum);
+            cellValue = rs.getString(columnName);
+        }catch (SQLException e){
+            System.out.println("Error occurred while getCellValue "+e.getMessage());
+        }
+
+        return cellValue;
+    }
+
+    /**
+     * getting entire column data as list according to column number
+     * @param columNum
+     * @return list object that contains all rows of that column
+     */
+    public static List<String> getColumnDataAsList(int columNum){
+
+        List<String> columDataLst = new ArrayList<>();
+
+        try{
+            rs.beforeFirst();
+            while (rs.next()){
+                columDataLst.add(rs.getString(columNum));
+            }
+            rs.beforeFirst();//make sure to reset the cursor to before first
+        }catch (SQLException e){
+            System.out.println("Error occurred while getColumnDataAsList");
+        }
+
+
+
+        return columDataLst;
     }
 
 }
