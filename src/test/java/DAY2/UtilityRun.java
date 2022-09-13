@@ -33,6 +33,19 @@ public class UtilityRun {
         System.out.println("DB_Utility.getCellValue(3, \"REGION_NAME\") = "
                 + DB_Utility.getCellValue(3, "REGION_NAME"));
 
+        System.out.println("DB_Utility.getColumnDataAsList(2) = "
+                + DB_Utility.getColumnDataAsList(2));
+
+        DB_Utility.displayAllData();
+
+        System.out.println("DB_Utility.getRowMap(3) = "
+                + DB_Utility.getRowMap(3));
+
+
+        System.out.println("DB_Utility.getAllRowsAsListOfMap() = "
+                + DB_Utility.getAllRowsAsListOfMap());
+
+
         DB_Utility.destroy();
 
     }
