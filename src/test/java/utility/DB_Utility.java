@@ -70,7 +70,8 @@ public class DB_Utility {
             rsmd = rs.getMetaData();
             int colCount = rsmd.getColumnCount();
             for (int col = 1; col <= colCount; col++) {
-                System.out.print(rsmd.getColumnName(col) + "\t");
+                //System.out.print(rsmd.getColumnName(col) + "\t");
+                System.out.printf("%-12s", rsmd.getColumnName(col));
             }
             System.out.println();
         } catch (SQLException e) {
@@ -90,6 +91,16 @@ public class DB_Utility {
             if (con != null) con.close();
         } catch (SQLException e) {
             System.out.println("Error occurred while closing resources " + e.getMessage());
+        }
+    }
+
+    //This method will reset the cursor to before first location
+    private static void resetCursor(){
+
+        try {
+            rs.beforeFirst();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 
@@ -220,14 +231,21 @@ public class DB_Utility {
         return columDataLst;
     }
 
-    //This method will reset the cursor to before first location
-    public static void resetCursor(){
+    public static List<String> getColumnDataAsList(String columnName){
 
-        try {
+        List<String> columDataLst = new ArrayList<>();
+
+        try{
             rs.beforeFirst();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            while (rs.next()){
+                columDataLst.add(rs.getString(columnName));
+            }
+            rs.beforeFirst();//make sure to reset the cursor to before first
+        }catch (SQLException e){
+            System.out.println("Error occurred while getColumnDataAsList");
         }
+
+        return columDataLst;
     }
 
 
@@ -241,7 +259,7 @@ public class DB_Utility {
             while (rs.next()) {
                 for (int col = 1; col <= colCount; col++) {
                     //System.out.print(rs.getString(col) + "\t");
-                    System.out.printf("%-35s", rs.getString(col));
+                    System.out.printf("%-12s", rs.getString(col));
                 }
                 System.out.println();
             }
