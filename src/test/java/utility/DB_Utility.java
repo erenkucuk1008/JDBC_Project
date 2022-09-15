@@ -318,4 +318,11 @@ public class DB_Utility {
         return allRowListOfMap;
     }
 
+    /**
+     * Get first cell value at first row, first column
+     */
+    public static String getFirstRowFirstColumn(){
+        return getCellValue(1,1);
+    }
+
 }
